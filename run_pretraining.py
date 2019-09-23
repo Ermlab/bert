@@ -141,9 +141,13 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
          bert_config, model.get_sequence_output(), model.get_embedding_table(),
          masked_lm_positions, masked_lm_ids, masked_lm_weights)
 
-    (next_sentence_loss, next_sentence_example_loss,
-     next_sentence_log_probs) = get_next_sentence_output(
-         bert_config, model.get_pooled_output(), next_sentence_labels)
+    # (next_sentence_loss, next_sentence_example_loss,
+    #  next_sentence_log_probs) = get_next_sentence_output(
+    #      bert_config, model.get_pooled_output(), next_sentence_labels)
+
+    next_sentence_loss = 0
+    next_sentence_example_loss = 0
+    next_sentence_log_probs = 0
 
     total_loss = masked_lm_loss + next_sentence_loss
 

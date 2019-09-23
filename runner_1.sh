@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 python3 run_pretraining.py \
- --input_file=gs://nl-data-storage/poleval/tfrecords/tfrecords/bert_dataset.tfrecords* \
- --output_dir=gs://nl-data-storage/poleval/test_v3_without_next_sentence\
+ --input_file=gs://nlp-data-storage/poleval/tfrecords/tfrecords/bert_dataset.tfrecords* \
+ --output_dir=gs://nlp-data-storage/poleval/test_v3_without_next_sentence \
  --do_train=True \
  --do_eval=True \
- --bert_config_file=gs://nl-data-storage/bert_config.json \
+ --bert_config_file=gs://nlp-data-storage/bert_config.json \
  --train_batch_size=1024 \
  --max_seq_length=128 \
  --max_predictions_per_seq=20 \

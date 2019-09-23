@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
+#Phase 1a
+
 python3 run_pretraining.py \
- --input_file=gs://nlp-data-storage/poleval/tfrecords/tfrecords/bert_dataset.tfrecords* \
- --output_dir=gs://nlp-data-storage/poleval/test_v3_without_next_sentence \
+ --input_file=gs://nlp-data-storage/poleval/tfrecords/tfrecords_seqlen_128/bert_dataset.tfrecords* \
+ --output_dir=gs://nlp-data-storage/poleval/test_v3_without_next_sentence_1a \
  --do_train=True \
- --do_eval=True \
  --bert_config_file=gs://nlp-data-storage/bert_config.json \
  --train_batch_size=1024 \
  --max_seq_length=128 \
@@ -13,7 +14,13 @@ python3 run_pretraining.py \
  --num_warmup_steps=10000 \
  --learning_rate=1e-4 \
  --use_tpu=True \
- --tpu_name=bert\
+ --tpu_name=polish-nlp-tpu \
  --save_checkpoints_steps=5000\
- --iterations_per_loop=250\
+ --iterations_per_loop=250 \
  --save_summary_steps=250
+
+
+
+
+
+

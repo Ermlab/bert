@@ -17,7 +17,3 @@ python3 ../run_pretraining.py \
  --use_tpu=True \
  --tpu_name=polish-nlp-tpu-1-v3 \
  --tpu_zone=us-central1-a
-
-
-
-

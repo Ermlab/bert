@@ -15,6 +15,6 @@ python3 ../run_pretraining.py \
  --iterations_per_loop=128\
  --max_eval_steps=128 \
  --save_summary_steps=128 \
+ --tpu-zone=us-central1-a \
  --use_tpu=True \
- --tpu_name=polish-nlp-tpu-1-v3 \
- --tpu-zone=us-central1-a
+ --tpu_name=polish-nlp-tpu-1-v3

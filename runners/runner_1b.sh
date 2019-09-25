@@ -18,6 +18,6 @@ python3 ../run_pretraining.py \
  --iterations_per_loop=250 \
  --save_summary_steps=250 \
  --save_checkpoints_steps=5000\
- --tpu-zone=us-central1-a \
+ --tpu_zone=us-central1-a \
  --use_tpu=True\
  --tpu_name=polish-nlp-tpu-1-v3

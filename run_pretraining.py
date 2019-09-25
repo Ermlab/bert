@@ -81,6 +81,9 @@ flags.DEFINE_integer("max_eval_steps", 100, "Maximum number of eval steps.")
 
 flags.DEFINE_bool("use_tpu", False, "Whether to use TPU or GPU/CPU.")
 
+flags.DEFINE_bool("do_next_sentence_pred", True, " Whether to use next sentence predication "
+                                                 "task while training and evaluation ")
+
 tf.flags.DEFINE_string(
     "tpu_name", None,
     "The Cloud TPU to use for training. This should be either the name "
@@ -141,13 +144,14 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
          bert_config, model.get_sequence_output(), model.get_embedding_table(),
          masked_lm_positions, masked_lm_ids, masked_lm_weights)
 
-    # (next_sentence_loss, next_sentence_example_loss,
-    #  next_sentence_log_probs) = get_next_sentence_output(
-    #      bert_config, model.get_pooled_output(), next_sentence_labels)
-
-    next_sentence_loss = 0
-    next_sentence_example_loss = 0
-    next_sentence_log_probs = 0
+    if FLAGS.do_next_sentence_pred:
+        (next_sentence_loss, next_sentence_example_loss,
+         next_sentence_log_probs) = get_next_sentence_output(
+             bert_config, model.get_pooled_output(), next_sentence_labels)
+    else:
+        next_sentence_loss = tf.constant(0.0)
+        next_sentence_example_loss = tf.constant(0.0)
+        next_sentence_log_probs = tf.constant(0.0)
 
     total_loss = masked_lm_loss + next_sentence_loss
 
@@ -175,6 +179,8 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
         init_string = ", *INIT_FROM_CKPT*"
       tf.logging.info("  name = %s, shape = %s%s", var.name, var.shape,
                       init_string)
+
+    tf.logging.info("**** End init Trainable Variables ****")
 
     output_spec = None
     if mode == tf.estimator.ModeKeys.TRAIN:
@@ -206,15 +212,20 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
         masked_lm_mean_loss = tf.metrics.mean(
             values=masked_lm_example_loss, weights=masked_lm_weights)
 
-        next_sentence_log_probs = tf.reshape(
-            next_sentence_log_probs, [-1, next_sentence_log_probs.shape[-1]])
-        next_sentence_predictions = tf.argmax(
-            next_sentence_log_probs, axis=-1, output_type=tf.int32)
-        next_sentence_labels = tf.reshape(next_sentence_labels, [-1])
-        next_sentence_accuracy = tf.metrics.accuracy(
-            labels=next_sentence_labels, predictions=next_sentence_predictions)
-        next_sentence_mean_loss = tf.metrics.mean(
-            values=next_sentence_example_loss)
+        if FLAGS.do_next_sentence_pred:
+            next_sentence_log_probs = tf.reshape(
+                next_sentence_log_probs, [-1, next_sentence_log_probs.shape[-1]])
+            next_sentence_predictions = tf.argmax(
+                next_sentence_log_probs, axis=-1, output_type=tf.int32)
+            next_sentence_labels = tf.reshape(next_sentence_labels, [-1])
+            next_sentence_accuracy = tf.metrics.accuracy(
+                labels=next_sentence_labels, predictions=next_sentence_predictions)
+            next_sentence_mean_loss = tf.metrics.mean(
+                values=next_sentence_example_loss)
+        else:
+            next_sentence_accuracy = tf.constant(0.0)
+            next_sentence_mean_loss = tf.constant(0.0)
+
 
         return {
             "masked_lm_accuracy": masked_lm_accuracy,

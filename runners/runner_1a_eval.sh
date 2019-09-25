@@ -11,10 +11,12 @@ python3 ../run_pretraining.py \
  --eval_batch_size=128 \
  --max_seq_length=128 \
  --iterations_per_loop=128\
- --max_eval_steps=128
- --save_summary_steps=128
+ --max_eval_steps=128 \
+ --save_summary_steps=128 \
  --use_tpu=True \
- --tpu_name=polish-nlp-tpu
+ --tpu_name=polish-nlp-tpu \
+ --tpu_name=polish-nlp-tpu-1-v3 \
+ --tpu-zone=us-central1-a
 
 
 

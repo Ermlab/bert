@@ -4,7 +4,7 @@
 
 python3 ../run_pretraining.py \
  --input_file=gs://nlp-data-storage/poleval/tfrecords/tfrecords_seqlen_128/bert_dataset.tfrecords* \
- --init_checkpoint=gs://nlp-data-storage/poleval/checkpoints/test_v3_without_next_sentence_1a \
+ --init_checkpoint=gs://nlp-data-storage/poleval/checkpoints/test_v3_without_next_sentence_1a/model.ckpt-270000 \
  --output_dir=gs://nlp-data-storage/poleval/checkpoints/test_v3_without_next_sentence_1b \
  --do_next_sentence_pred=False \
  --do_train=True \

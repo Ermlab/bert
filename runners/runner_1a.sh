@@ -14,12 +14,12 @@ python3 ../run_pretraining.py \
  --num_train_steps=270000 \
  --num_warmup_steps=10000 \
  --learning_rate=1e-4 \
- --tpu-zone=us-central1-a \
- --use_tpu=True \
- --tpu_name=polish-nlp-tpu-1-v3 \
  --save_checkpoints_steps=5000\
  --iterations_per_loop=250 \
- --save_summary_steps=250
+ --save_summary_steps=250 \
+ --use_tpu=True \
+ --tpu_name=polish-nlp-tpu-1-v3 \
+ --tpu_zone=us-central1-a
 
 
 

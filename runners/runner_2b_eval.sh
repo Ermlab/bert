@@ -2,11 +2,14 @@
 
 #Phase 2a eval
 
+DATASET_NAME=$0
+SEQ_LEN=$1
+CHECKPOINT_PREFIX=$2
+
 python3 ../run_pretraining.py \
- --input_file=gs://nlp-data-storage/poleval/tfrecords/tfrecords_test/bert_dataset.tfrecords* \
- --init_checkpoint=gs://nlp-data-storage/poleval/checkpoints/without_next_sentence_2b/ \
- --output_dir=gs://nlp-data-storage/poleval/checkpoints/without_next_sentence_2b_eval \
- --do_lower_case=False \
+ --input_file=gs://nlp-data-storage/"$DATASET_NAME"/tfrecords/"$SEQ_LEN"/bert_dataset.tfrecords* \
+ --init_checkpoint=gs://nlp-data-storage/"$DATASET_NAME"/checkpoints/"$CHECKPOINT_PREFIX"_without_next_sentence_2b/ \
+ --output_dir=gs://nlp-data-storage/"$DATASET_NAME"/checkpoints/"$CHECKPOINT_PREFIX"_without_next_sentence_2b_eval \
  --do_next_sentence_pred=True \
  --do_train=False \
  --do_eval=True \

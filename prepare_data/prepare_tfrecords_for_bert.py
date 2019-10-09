@@ -102,6 +102,7 @@ if __name__ == '__main__':
                         type=int,
                         default=0,
                         help='Run from specific iteration number')
+
     args = parser.parse_args()
 
     EXTRACTION_FACTORY = {

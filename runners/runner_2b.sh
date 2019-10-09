@@ -4,9 +4,9 @@
 #Phase 2b
 
 python3 ../run_pretraining.py \
- --input_file=gs://nlp-data-storage/poleval/tfrecords/tfrecords/bert_dataset.tfrecords* \
- --init_checkpoint=gs://nlp-data-storage/poleval/checkpoints/test_v3_without_next_sentence_1a/model.ckpt-270000 \
- --output_dir=gs://nlp-data-storage/poleval/checkpoints/test_v3_without_next_sentence_2 \
+ --input_file=gs://nlp-data-storage/poleval/tfrecords/tfrecords_seqlen_512/bert_dataset.tfrecords* \
+ --init_checkpoint=gs://nlp-data-storage/poleval/checkpoints/without_next_sentence_1b/model.ckpt-270000 \
+ --output_dir=gs://nlp-data-storage/poleval/checkpoints/without_next_sentence_2b \
  --do_next_sentence_pred=False \
  --do_train=True \
  --bert_config_file=gs://nlp-data-storage/bert_config.json \
@@ -16,7 +16,7 @@ python3 ../run_pretraining.py \
  --num_train_steps=30000 \
  --num_warmup_steps=10000 \
  --learning_rate=5e-5 \
- --tpu-zone=us-central1-a \
+ --tpu_zone=us-central1-a \
  --use_tpu=True \
  --tpu_name=polish-nlp-tpu-1-v3 \
  --save_checkpoints_steps=5000 \

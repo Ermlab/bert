@@ -3,8 +3,9 @@
 
 python3 ../run_pretraining.py \
  --input_file=gs://nlp-data-storage/poleval/tfrecords/tfrecords_test/bert_dataset.tfrecords* \
- --init_checkpoint=gs://nlp-data-storage/poleval/checkpoints/test_v3_without_next_sentence_1a/model.ckpt-270000 \
- --output_dir=gs://nlp-data-storage/poleval/checkpoints/test_v3_without_next_sentence_1a_eval \
+ --init_checkpoint=gs://nlp-data-storage/poleval/checkpoints/without_next_sentence_1a/model.ckpt-270000 \
+ --output_dir=gs://nlp-data-storage/poleval/checkpoints/without_next_sentence_1a_eval \
+ --do_lower_case=False \
  --do_next_sentence_pred=True \
  --do_train=False \
  --do_eval=True \

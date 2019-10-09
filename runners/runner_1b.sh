@@ -2,9 +2,9 @@
 
 # Phase 1b
 
-DATASET_NAME=$0
-SEQ_LEN=$1
-CHECKPOINT_PREFIX=$2
+DATASET_NAME=$1
+SEQ_LEN=$2
+CHECKPOINT_PREFIX=$3
 
 python3 ../run_pretraining.py \
  --input_file=gs://nlp-data-storage/"$DATASET_NAME"/tfrecords/"$SEQ_LEN"/bert_dataset.tfrecords* \

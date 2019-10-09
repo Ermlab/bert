@@ -3,11 +3,12 @@
 DATASET_NAME=$1
 SEQ_LEN=$2
 CHECKPOINT_PREFIX=$3
+CHECKPOINT_FOLDER=$4
 
 python3 ../run_pretraining.py \
  --input_file=gs://nlp-data-storage/"$DATASET_NAME"/tfrecords/"$SEQ_LEN"/bert_dataset.tfrecords* \
- --init_checkpoint=gs://nlp-data-storage/"$DATASET_NAME"/checkpoints/"$CHECKPOINT_PREFIX"_without_next_sentence_1a/model.ckpt-540000 \
- --output_dir=gs://nlp-data-storage/"$DATASET_NAME"/checkpoints/"$CHECKPOINT_PREFIX"_without_next_sentence_1b_eval \
+ --init_checkpoint=gs://nlp-data-storage/"$CHECKPOINT_FOLDER"/checkpoints/"$CHECKPOINT_PREFIX"_without_next_sentence_1a/model.ckpt-540000 \
+ --output_dir=gs://nlp-data-storage/"$CHECKPOINT_FOLDER"/checkpoints/"$CHECKPOINT_PREFIX"_without_next_sentence_1b_eval \
  --do_next_sentence_pred=True \
  --do_train=False \
  --do_eval=True \

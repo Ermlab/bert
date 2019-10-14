@@ -134,7 +134,7 @@ if __name__ == '__main__':
 
                     os.system(CMD.format(
                         input_file=tmp_file.name,
-                        output_file=os.path.join(output_path, f"bert_dataset.tfrecords{i}"),
+                        output_file=os.path.join(output_path, "bert_dataset.tfrecords{i}".format(i=i)),
                         vocab_file=vocab_path,
                         bptt=args.bptt,
                         path_to_bert=bert_path

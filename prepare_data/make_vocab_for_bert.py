@@ -51,24 +51,24 @@ if __name__ == '__main__':
     model_type = args.model_type
     input_sentence_size = args.input_sentence_size
     dataset_name = args.dataset_name
-
+    print(input_sentence_size)
     tok_model = os.path.join(
         args.output_path,
-        f'{dataset_name}__{model_type}__voc_{vocab_size}__input_sentence_size_{input_sentence_size}'
+        '{dataset_name}__{model_type}__voc_{vocab_size}__input_sentence_size_{input_sentence_size}'.format(dataset_name=dataset_name,model_type=model_type,vocab_size=vocab_size,input_sentence_size=input_sentence_size)
     )
-
-    cmd = f'--input={data_file}' \
-          f' --model_prefix={tok_model}' \
-          f' --model_type={model_type}' \
-          f' --vocab_size={vocab_size}'
+    print(tok_model)
+    cmd = '--input={data_file}'.format(data_file=data_file) 
+    cmd += ' --model_prefix={model_prefix}'.format(model_prefix=tok_model)
+    cmd +=' --model_type={model_type}'.format(model_type=model_type) 
+    cmd +=  ' --vocab_size={vocab_size}'.format(vocab_size=vocab_size)
     if input_sentence_size:
-        cmd += f' --input_sentence_size={input_sentence_size}'
+        cmd += ' --input_sentence_size={iss}'.format(iss=input_sentence_size)
     if args.mask_special_tokens:
-        cmd += f' --pad_piece=[PAD] --unk_piece=[UNK] --bos_piece=[SEP] --eos_piece=[CLS]' \
-               f' --pad_id=0 --unk_id=1 --bos_id=2 --eos_id=3' \
-               f' --user_defined_symbols=[MASK] '
+        cmd += ' --pad_piece=[PAD] --unk_piece=[UNK] --bos_piece=[SEP] --eos_piece=[CLS]' \
+               ' --pad_id=0 --unk_id=1 --bos_id=2 --eos_id=3' \
+               ' --user_defined_symbols=[MASK] '
     if args.shuffle:
-        cmd += f' --shuffle_input_sentence=true'
+        cmd += ' --shuffle_input_sentence=true'
 
     sp.SentencePieceTrainer.train(cmd)
 

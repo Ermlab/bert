@@ -10,7 +10,7 @@ python {path_to_bert} \
   --input_file={input_file} \
   --output_file={output_file} \
   --vocab_file={vocab_file} \
-  --do_lower_case=False \
+  --do_lower_case={lower_case} \
   --do_whole_word_mask=True \
   --max_seq_length={bptt} \
   --max_predictions_per_seq=20 \
@@ -83,6 +83,10 @@ if __name__ == '__main__':
     parser.add_argument('bert_path',
                         type=str,
                         help='Path to folder where is bert repository')
+    parser.add_argument('-lc',
+                        '--lower_case',
+                        action='store_true',
+                        help='Do lower case tfrecords')
     parser.add_argument('-sl',
                         '--split_by_lines',
                         type=int,
@@ -135,7 +139,8 @@ if __name__ == '__main__':
                         output_file=os.path.join(output_path, "bert_dataset.tfrecords{i}".format(i=i)),
                         vocab_file=vocab_path,
                         bptt=args.bptt,
-                        path_to_bert=bert_path
+                        path_to_bert=bert_path,
+                        lower_case=args.lower_case
                     ))
 
 

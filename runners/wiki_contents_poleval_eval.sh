@@ -2,7 +2,7 @@
 
 python3 ../run_pretraining.py \
  --input_file=gs://nlp-data-storage/poleval/tfrecords/tfrecords_test/bert_dataset.tfrecords* \
- --init_checkpoint=gs://nlp-data-storage/wiki_contents/checkpoints/without_next_sentence_2b/bert_model-30000.ckpt \
+ --init_checkpoint=gs://nlp-data-storage/wiki_contents/checkpoints/without_next_sentence_2b/model.ckpt-30000.ckpt \
  --output_dir=gs://nlp-data-storage/wiki_contents/poleval_eval \
  --do_next_sentence_pred=True \
  --do_train=False \

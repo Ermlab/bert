@@ -62,7 +62,7 @@ def extract_article_by_number_of_sentence(txt_file: TextIO, split_after: int) ->
             yield lines
             lines = ''
         else:
-            lines = "".join([lines, line])
+            lines += line
     yield lines
 
 
@@ -102,7 +102,6 @@ if __name__ == '__main__':
                         type=int,
                         default=0,
                         help='Run from specific iteration number')
-
     args = parser.parse_args()
 
     EXTRACTION_FACTORY = {
@@ -131,7 +130,6 @@ if __name__ == '__main__':
                 with tempfile.NamedTemporaryFile(mode='w+', dir=tmp_file_dir) as tmp_file:
                     tmp_file.write(article)
                     tmp_file.seek(0)
-
                     os.system(CMD.format(
                         input_file=tmp_file.name,
                         output_file=os.path.join(output_path, "bert_dataset.tfrecords{i}".format(i=i)),
@@ -139,4 +137,5 @@ if __name__ == '__main__':
                         bptt=args.bptt,
                         path_to_bert=bert_path
                     ))
+
 

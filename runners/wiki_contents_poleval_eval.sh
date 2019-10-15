@@ -7,7 +7,7 @@ python3 ../run_pretraining.py \
  --do_next_sentence_pred=True \
  --do_train=False \
  --do_eval=True \
- --bert_config_file=gs://nlp-data-storage/wiki_contents/config.json \
+ --bert_config_file=gs://nlp-data-storage/wiki_contents/bert_config.json \
  --eval_batch_size=128 \
  --max_seq_length=128 \
  --iterations_per_loop=128\

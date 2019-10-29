@@ -38,7 +38,7 @@ def extract_article_by_blank_lines(txt_file: TextIO) -> str:
             yield lines
             lines = ''
         elif line != '\n':
-            lines = "".join([lines, line])
+            lines += line
     yield lines
 
 

@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 tensorflow = ">=1.14.0"
 sentencepiece = "*"
+nltk = "*"
 
 [requires]
 python_version = "3.7"

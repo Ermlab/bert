@@ -4,11 +4,15 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pyprof2calltree = "*"
 
 [packages]
 tensorflow = ">=1.14.0"
 sentencepiece = "*"
 nltk = "*"
+progress = "*"
+multiprocessing-on-dill = "*"
+psutil = "*"
 
 [requires]
 python_version = "3.7"
